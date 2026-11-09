@@ -65,11 +65,32 @@ print("Maximum position:", max_position)
 
 # 5. Plot the graph
 plt.figure(figsize=(12, 6))
-plt.plot(positions, values)
+
+# Plot cumulative GC skew
+plt.plot(positions, values, label="Cumulative GC Skew")
+
+# Highlight the known OriC region
+plt.axvspan(
+    3923767, 3924025,
+    color="green",
+    alpha=0.3,
+    label="Known OriC Region"
+)
+
+# Mark our predicted OriC position
+plt.axvline(
+    3925597,
+    color="red",
+    linestyle="--",
+    label="Predicted OriC Position"
+)
+
 plt.xlabel("Chromosome Position (bp)")
 plt.ylabel("Cumulative GC Skew")
-plt.title("E. coli Cumulative GC Skew")
+plt.title("E. coli Cumulative GC Skew Analysis")
+
+plt.legend()
 plt.grid(True)
+
 plt.savefig("results_gc_skew.png", dpi=300)
 plt.show()
-
